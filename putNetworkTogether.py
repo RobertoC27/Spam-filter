@@ -72,7 +72,7 @@ def calcProb(phrase, k, generalCounter, HAM_WORDS, SPAM_WORDS):
     #calculo primero la prob de que sea HAM
     for word in tmp_list:
         if word not in HAM_NETWORK:
-            numerador *= round(float(1./(HAM_WORDS + (SMOOTHING * TOTAL_CLASSES))), 8)
+            numerador *= float(1./(HAM_WORDS + (SMOOTHING * TOTAL_CLASSES)))
         else:
             numerador *= HAM_NETWORK[word]["prob"]
         if word not in SPAM_NETWORK:
