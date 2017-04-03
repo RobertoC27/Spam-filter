@@ -19,24 +19,28 @@ for line in INPUT:
         SPAM.append(line)
 INPUT.close()
 
-for index in range(len(HAM)):
-    CLASS = random.random()
-    h1 = HAM[index]
-    if CLASS < 0.8:
-        TRAINING.append(h1)
-    elif CLASS < 0.9:
-        CROSS_VAL.append(h1)
-    else:
-        TEST.append(h1)
+refh = [pal for pal in HAM]
+for i in range(int(len(refh)*0.8)):
+    ind = random.randint(0, len(HAM)-1)
+    TRAINING.append(HAM.pop(ind))
 
-    if index < len(SPAM):
-        s1 = SPAM[index]
-        if CLASS < 0.8:
-            TRAINING.append(s1)
-        elif CLASS < 0.9:
-            CROSS_VAL.append(s1)
-        else:
-            TEST.append(s1)
+for i in range(int(len(refh)*0.1)+1):
+    ind = random.randint(0, len(HAM)-1)
+    CROSS_VAL.append(HAM.pop(ind))
+
+TEST.extend(HAM)
+
+refs = [pal for pal in SPAM]
+for i in range(int(len(refs)*0.8)):
+    ind = random.randint(0, len(SPAM)-1)
+    TRAINING.append(SPAM.pop(ind))
+
+for i in range(int(len(refs)*0.1)+1):
+    ind = random.randint(0, len(SPAM)-1)
+    CROSS_VAL.append(SPAM.pop(ind))
+
+TEST.extend(SPAM)
+
 
 TRAF = open("training.txt", "w")
 TRAF.writelines(TRAINING)
