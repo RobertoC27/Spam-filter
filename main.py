@@ -48,7 +48,11 @@ def runMe():
                     efectividad += 1
                 else:
                     results.append("spam\t{}".format(mail))
-
+        print "---------"
+        print efectividad
+        print len(currently_classifying)
+        print len(currently_classifying) - efectividad
+        print "---------"
         rf = open("results.txt", "w")
         rf.writelines(results)
         rf.close()

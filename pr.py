@@ -1,4 +1,5 @@
 import random
+import re
 
 INPUT = open('test_corpus.txt', 'r')
 HAM = []
@@ -30,3 +31,6 @@ for i in range(int(len(refh)*0.1)+1):
 TEST.extend(HAM)
 
 
+kl = "hola...como esta"
+tmp_list = re.split(r'\W+', kl)
+print tmp_list
