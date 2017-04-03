@@ -18,7 +18,7 @@ def metodo2(k, toremove=[]):
     counters = metodo1("training.txt")
     general = counters[0]
     total_classes = len(general.keys())
-    print "sin repetir->", total_classes
+    #print "sin repetir->", total_classes
     #put together the ham network
     counter_ham = counters[1]
     for wrd in toremove:
@@ -49,10 +49,15 @@ def metodo2(k, toremove=[]):
 def calcProb(phrase, k, generalCounter, HAM_WORDS, SPAM_WORDS):
 
     phrase = re.sub(r"\d+", "nnum", phrase)
+    phrase = re.sub(r"ham", " ", phrase)
+    phrase = re.sub(r"spam", " ", phrase)
     tmp_list = re.split(r'\W+', phrase.lower())
+    try:
+        tmp_list.remove("")
+    except ValueError:
+        pass
     #se quitan las palabras mas comunes y que no agregan ningun valor a la busqueda
     tmp_list = [w for w in tmp_list if not w in STOP_WORDS]
-    
     numerador = 1
     denomidador = 1
 
@@ -102,6 +107,8 @@ def calcProb(phrase, k, generalCounter, HAM_WORDS, SPAM_WORDS):
     return prob_ham, prob_spam
 
 
+
+"""
 K = 3
 K2 = 15
 ahg = metodo2(K)
@@ -125,6 +132,6 @@ for line in CV:
     #print res[0] > res[1]
 
 print EFF/float(len(CV))
-
+"""
 
 
