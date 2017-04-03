@@ -20,10 +20,14 @@ for line in INPUT:
 INPUT.close()
 
 refh = [pal for pal in HAM]
+#me muevo sobre el 80% de los datos de spam conocidos y
+#random los meto a la lista de training
 for i in range(int(len(refh)*0.8)):
     ind = random.randint(0, len(HAM)-1)
     TRAINING.append(HAM.pop(ind))
 
+#me muevo sobre el 10% de los datos de spam conocidos y
+#random los meto a la lista de cross validation
 for i in range(int(len(refh)*0.1)+1):
     ind = random.randint(0, len(HAM)-1)
     CROSS_VAL.append(HAM.pop(ind))
