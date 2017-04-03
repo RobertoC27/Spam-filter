@@ -14,6 +14,8 @@ for line in INPUT:
         SPAM.append(line)
 INPUT.close()
 
+print len(HAM)
+print len(SPAM)
 
 refh = [pal for pal in HAM]
 refs = [pal for pal in SPAM]
@@ -26,12 +28,5 @@ for i in range(int(len(refh)*0.1)+1):
     CROSS_VAL.append(HAM.pop(ind))
 
 TEST.extend(HAM)
-print len(TRAINING)
-print len(CROSS_VAL)
-print len(TEST)
-print "---"
-print int(len(refh)*0.8)
-print int(len(refh)*0.1)
-print int(len(refh)*0.1) + int(len(refh)*0.1) + int(len(refh)*0.8)
-print len(HAM)
-print len(SPAM)
+
+

@@ -30,6 +30,7 @@ def metodo1(nombre):
         tmp_list = re.split(r'\W+', line.lower())
         #se quitan las palabras mas comunes y que no agregan ningun valor a la busqueda
         tmp_list = [w for w in tmp_list if not w in STOP_WORDS]
+
         try:
             tmp_list.remove("")
         except ValueError:
@@ -62,8 +63,4 @@ def metodo1(nombre):
 
     ham = Counter(BOWHAM)
     spam = Counter(BOWSPAM)
-
     return general, ham, spam
-
-
-metodo1("training.txt")
