@@ -28,10 +28,6 @@ def metodo1(nombre):
         tmp_list = re.split(r'\W+', line.lower())
         #se quitan las palabras mas comunes y que no agregan ningun valor a la busqueda
         tmp_list = [w for w in tmp_list if not w in STOP_WORDS]
-<<<<<<< HEAD
-        
-=======
->>>>>>> 4d67dc8754eda850ca7de6d83e6e3960532f8ed6
         try:
             tmp_list.remove("")
         except ValueError:
