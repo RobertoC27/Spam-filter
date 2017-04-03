@@ -21,6 +21,8 @@ in that order
 def metodo1(nombre):
     actual_file = codecs.open(nombre, "r", "utf-8")
     lines = actual_file.readlines()
+    cntham = 0
+    cntspam = 0
     for line in lines:
         #cambia los numeros por nnum que es mas eficiente para hacer detecciones
         #que buscar el numero como tal xq es menos prob. encontrarlo
@@ -32,6 +34,9 @@ def metodo1(nombre):
             tmp_list.remove("")
         except ValueError:
             pass
+        #a la lista general si le dejo el count de spam y ham
+        #despues de eso ya lo quito para que no haga ruido a las otras redes
+        BOWGENERAL.extend(tmp_list)
         try:
             tmp_list.remove("ham")
         except ValueError:
@@ -42,17 +47,23 @@ def metodo1(nombre):
             pass
 
 
-        BOWGENERAL.extend(tmp_list)
-
         if line.startswith("spam"):
             BOWSPAM.extend(tmp_list)
+            cntspam = cntspam + 1
         else:
             BOWHAM.extend(tmp_list)
-
+            cntham = cntham + 1
+            #print BOWHAM
+            #kit = raw_input("sigue: ")
+            #if kit == "p":
+             #   break
 
     general = Counter(BOWGENERAL)
+
     ham = Counter(BOWHAM)
     spam = Counter(BOWSPAM)
+
     return general, ham, spam
 
 
+metodo1("training.txt")
