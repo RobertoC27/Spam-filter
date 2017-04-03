@@ -15,31 +15,34 @@ def metodo2(k, toremove=[]):
     counter_ham = counters[1]
     for wrd in toremove:
         del counter_ham[wrd]
-    #print counter_ham.most_common(15)
+
     hamwords = sum(counter_ham.values())
     ham_classes = float(len(counter_ham.keys()))
-    print "--------------------------------"
+
     counter_spam = counters[2]
-    #print counter_spam.most_common(15)
+    for wrd in toremove:
+        del counter_spam[wrd]
     spam_classes = float(len(counter_spam.keys()))
     spamwords = sum(counter_spam.values())
-    print (k * (ham_classes+spam_classes))
 
+    total_classes = (ham_classes+spam_classes)
+    denom = float(hamwords + (k * total_classes))
     #put together the ham network
     for ham_word in counter_ham:
         current_freq = counter_ham.get(ham_word)
-        current_prob = round((current_freq + k)/float(hamwords + (k * (ham_classes+spam_classes))), 3)
+        current_prob = round((current_freq + k)/denom, 8)
         HAM_NETWORK.update({ham_word:[{'freq':current_freq, 'prob':current_prob}]})
 
     #put together the spam network
+    denom = float(spamwords + (k * total_classes))
     for spam_word in counter_spam:
         current_freq = counter_spam.get(spam_word)
-        current_prob = round((current_freq + k)/float(spamwords + (k * (ham_classes+spam_classes))), 3)
+        current_prob = round((current_freq + k)/denom, 8)
         SPAM_NETWORK.update({spam_word:[{'freq':current_freq, 'prob':current_prob}]})
 
     return HAM_NETWORK, SPAM_NETWORK
 
-HJS = metodo2(5)
+HJS = metodo2(10)
 print HJS[1]
 
 
